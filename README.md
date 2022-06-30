@@ -3,4 +3,4 @@
 
 Here's how it looks:
 
-<img src="https://i.ibb.co/vwTCGDd/Screenshot-75.png" width="300" />
+<img src="https://i.ibb.co/PNf4LwL/tetris-game.png" width="300" />

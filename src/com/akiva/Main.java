@@ -15,6 +15,7 @@ public class Main {
                 boardWidth,
                 boardHeight,
                 updatable::getColorIdBoard,
+                updatable::getNextTetrominoColorIdBoard,
                 updatable::getLineExplodedCount
         );
         GameLoop gameLoop = new GameLoop(drawable, updatable);
