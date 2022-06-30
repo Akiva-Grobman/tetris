@@ -11,6 +11,7 @@ public class TetrisGraphicsContainer implements GameLoopDrawable {
     public TetrisGraphicsContainer(int tileColumnCount,
                                    int tileRowCount,
                                    Supplier<int[][]> getBoardColors,
+                                   Supplier<int[][]> getNextTetromino,
                                    Supplier<Integer> getExplodedCount) {
         int width = Toolkit.getDefaultToolkit().getScreenSize().width / 3 * 2;
         int height = Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -27,6 +28,10 @@ public class TetrisGraphicsContainer implements GameLoopDrawable {
                 new ExplodingCounter(width / 3, height / 10, getExplodedCount),
                 BorderLayout.WEST
             );
+        window.addComponent(
+                new NextTetrominoDisplay(width / 3, height / 10, getNextTetromino),
+                BorderLayout.EAST
+        );
     }
 
     @Override

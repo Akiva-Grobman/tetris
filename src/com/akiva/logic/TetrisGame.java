@@ -70,6 +70,20 @@ public class TetrisGame implements GameLoopUpdatable, Subscribable {
         return coloredBoard;
     }
 
+    public int[][] getNextTetrominoColorIdBoard() {
+        int[][] tetrominoBoard = new int[nextTetromino.getPositionMatrix().length][nextTetromino.getPositionMatrix()[0].length];
+        for (int x = 0; x < nextTetromino.getPositionMatrix().length; x++) {
+            for (int y = 0; y < nextTetromino.getPositionMatrix()[x].length; y++) {
+                if (nextTetromino.getPositionMatrix()[x][y]) {
+                    tetrominoBoard[x][y] = nextTetromino.getColorId();
+                } else {
+                    tetrominoBoard[x][y] = EMPTY_SQUARE_COLOR_ID;
+                }
+            }
+        }
+        return tetrominoBoard;
+    }
+
     public int getLineExplodedCount() {
         return lineExplodedCount;
     }
