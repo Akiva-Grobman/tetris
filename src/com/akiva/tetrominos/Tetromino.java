@@ -1,74 +1,25 @@
 package com.akiva.tetrominos;
 
-import com.akiva.graphics.Colors;
-
 import java.awt.*;
 
-public enum Tetromino {
-    I(new boolean[][]{
-            {false, false, true, false},
-            {false, false, true, false},
-            {false, false, true, false},
-            {false, false, true, false}
-    }, 0),
-    O(new boolean[][]{
-            {false, false, false, false},
-            {false, true, true, false},
-            {false, true, true, false},
-            {false, false, false, false}
-    }, 1),
-    T(new boolean[][]{
-            {false, false, true, false},
-            {false, true, true, false},
-            {false, false, true, false},
-            {false, false, false, false}
-    }, 2),
-    S(new boolean[][]{
-            {false, true, false, false},
-            {false, true, false, false},
-            {false, false, true, false},
-            {false, false, true, false}
-    }, 3),
-    Z(new boolean[][]{
-            {false, false, true, false},
-            {false, false, true, false},
-            {false, true, false, false},
-            {false, true, false, false}
-    }, 4),
-    J(new boolean[][]{
-            {false, true, true, false},
-            {false, true, false, false},
-            {false, true, false, false},
-            {false, false, false, false}
-    }, 5),
-    L(new boolean[][]{
-            {false, true, true, false},
-            {false, false, true, false},
-            {false, false, true, false},
-            {false, false, false, false}
-    }, 6);
+public class Tetromino {
 
-    private final int colorId;
     private final Point position;
-    private boolean[][] matrix;
+    private final int colorId;
+    private boolean[][] positionMatrix;
 
-    Tetromino(boolean[][] matrix, int colorId) {
+    public Tetromino(boolean[][] positionMatrix, int colorId, Point position) {
+        this.positionMatrix = positionMatrix;
         this.colorId = colorId;
-        this.position = new Point();
-        int matrixSize = 4;
-        assert matrix.length == matrixSize;
-        for (boolean[] line: matrix) {
-            assert line.length == matrixSize;
-        }
-        this.matrix = matrix;
+        this.position = position;
     }
 
-    public boolean[][] getMatrix() {
-        return matrix;
+    public boolean[][] getPositionMatrix() {
+        return positionMatrix;
     }
 
-    public void setMatrix(boolean[][] matrix) {
-        this.matrix = matrix;
+    public void setPositionMatrix(boolean[][] positionMatrix) {
+        this.positionMatrix = positionMatrix;
     }
 
     public Point getPosition() {
@@ -78,4 +29,5 @@ public enum Tetromino {
     public int getColorId() {
         return colorId;
     }
+
 }

@@ -2,6 +2,8 @@ package com.akiva.logic;
 
 import com.akiva.keyboardinput.Subscribable;
 import com.akiva.tetrominos.Tetromino;
+import com.akiva.tetrominos.TetrominoFactory;
+import com.akiva.tetrominos.TetrominoType;
 
 import java.util.Arrays;
 
@@ -64,9 +66,9 @@ public class TetrisGame implements GameLoopUpdatable, Subscribable {
         for (int i = 0; i < coloredBoard.length; i++) {
             coloredBoard[i] = Arrays.copyOf(colorIdBoard[i], colorIdBoard[i].length);
         }
-        for (int x = 0; x < currentTetromino.getMatrix().length; x++) {
-            for (int y = 0; y < currentTetromino.getMatrix()[x].length; y++) {
-                if (currentTetromino.getMatrix()[x][y]) {
+        for (int x = 0; x < currentTetromino.getPositionMatrix().length; x++) {
+            for (int y = 0; y < currentTetromino.getPositionMatrix()[x].length; y++) {
+                if (currentTetromino.getPositionMatrix()[x][y]) {
                     coloredBoard[x + currentTetromino.getPosition().x][y + currentTetromino.getPosition().y] = currentTetromino.getColorId();
                 }
             }
@@ -87,9 +89,9 @@ public class TetrisGame implements GameLoopUpdatable, Subscribable {
     }
 
     private void movedTetrominoDown() throws ReachedBottomException {
-        for (int x = 0; x < currentTetromino.getMatrix().length; x++) {
-            for (int y = 0; y < currentTetromino.getMatrix()[x].length; y++) {
-                if (!currentTetromino.getMatrix()[x][y]) {
+        for (int x = 0; x < currentTetromino.getPositionMatrix().length; x++) {
+            for (int y = 0; y < currentTetromino.getPositionMatrix()[x].length; y++) {
+                if (!currentTetromino.getPositionMatrix()[x][y]) {
                     continue;
                 }
                 int newYPosition = y + currentTetromino.getPosition().y + 1;
@@ -110,13 +112,13 @@ public class TetrisGame implements GameLoopUpdatable, Subscribable {
     }
 
     private void onUpClick() {
-        currentTetromino.setMatrix(TetrominoRotator.getRotated(currentTetromino.getMatrix()));
+        currentTetromino.setPositionMatrix(TetrominoRotator.getRotated(currentTetromino.getPositionMatrix()));
     }
 
     private int getUpdatedXPosition(int direction) {
-        for (int x = 0; x < currentTetromino.getMatrix().length; x++) {
-            for (int y = 0; y < currentTetromino.getMatrix()[x].length; y++) {
-                if (!currentTetromino.getMatrix()[x][y]) {
+        for (int x = 0; x < currentTetromino.getPositionMatrix().length; x++) {
+            for (int y = 0; y < currentTetromino.getPositionMatrix()[x].length; y++) {
+                if (!currentTetromino.getPositionMatrix()[x][y]) {
                     continue;
                 }
                 int newXPosition = x + currentTetromino.getPosition().x + direction;
@@ -129,9 +131,9 @@ public class TetrisGame implements GameLoopUpdatable, Subscribable {
     }
 
     private void updateCurrentTetromino() {
-        for (int x = 0; x < currentTetromino.getMatrix().length; x++) {
-            for (int y = 0; y < currentTetromino.getMatrix()[x].length; y++) {
-                if (currentTetromino.getMatrix()[x][y]) {
+        for (int x = 0; x < currentTetromino.getPositionMatrix().length; x++) {
+            for (int y = 0; y < currentTetromino.getPositionMatrix()[x].length; y++) {
+                if (currentTetromino.getPositionMatrix()[x][y]) {
                     tetrisBoard[x + currentTetromino.getPosition().x][y + currentTetromino.getPosition().y] = true;
                     colorIdBoard[x + currentTetromino.getPosition().x][y + currentTetromino.getPosition().y] = currentTetromino.getColorId();
                 }
@@ -142,7 +144,10 @@ public class TetrisGame implements GameLoopUpdatable, Subscribable {
     }
 
     private Tetromino getRandomTetromino() {
-        return Tetromino.values()[(int)(Math.random() * Tetromino.values().length)];
+        return TetrominoFactory.getTetromino(
+                TetrominoType.values()[(int)(Math.random() * TetrominoType.values().length)],
+                tetrisBoard.length / 2
+            );
     }
 
 }
