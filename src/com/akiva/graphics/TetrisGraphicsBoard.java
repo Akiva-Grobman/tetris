@@ -26,7 +26,7 @@ public class TetrisGraphicsBoard extends JPanel {
         for (int x = 0; x < tileColumnCount; x++) {
             tiles[x] = new Tile[tileRowCount];
             for (int y = 0; y < tileRowCount; y++) {
-                tiles[x][y] = new Tile(x, y, color, TILE_SIZE);
+                tiles[x][y] = new Tile(x, y, color, TILE_SIZE, TILE_SIZE);
             }
         }
         return tiles;
