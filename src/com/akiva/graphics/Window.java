@@ -10,6 +10,7 @@ public class Window extends JFrame {
     public Window(int width, int height) {
         graphicsContainer = new JPanel();
         Dimension graphicsContainerDimension = new Dimension(width, height);
+        graphicsContainer.setLayout(new BorderLayout());
         graphicsContainer.setPreferredSize(graphicsContainerDimension);
         graphicsContainer.setMaximumSize(graphicsContainerDimension);
         graphicsContainer.setMinimumSize(graphicsContainerDimension);
@@ -24,9 +25,8 @@ public class Window extends JFrame {
         setVisible(true);
     }
 
-    public void addComponent(Component component) {
-        graphicsContainer.add(component);
-//        repaint();
+    public void addComponent(Component component, String location) {
+        graphicsContainer.add(component, location);
     }
 
 }

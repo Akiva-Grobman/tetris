@@ -20,11 +20,11 @@ public class Colors {
     };
     public static final int DEFAULT_BACKGROUND_ID = tileColors.size() - 1;
 
-    static Color getDefaultBackgroundColor() {
+    public static Color getDefaultBackgroundColor() {
         return Color.black;
     }
 
-    static Color getBoardBoarderColor() {
+    public static Color getBoardBoarderColor() {
         return Color.red;
     }
 
@@ -32,7 +32,7 @@ public class Colors {
         return tileColors.get(id);
     }
 
-    static Color getRandomColor() {
+    public static Color getRandomColor() {
         return new Color(
                 (int) (Math.random() * 255),
                 (int) (Math.random() * 255),
@@ -42,5 +42,9 @@ public class Colors {
 
     public static Color getColorById(int colorId) {
         return tileColors.get(colorId);
+    }
+
+    public static Color getTextColor() {
+        return Color.white;
     }
 }
