@@ -10,8 +10,8 @@ public class Tile {
     private Color tileColor;
 
     Tile(int x, int y, Color tileColor, int tileSize) {
-        this.x = 341 + x * tileSize;  // TODO remove magic offset
-        this.y = 30 + y * tileSize;  // TODO remove magic offset
+        this.x = x * tileSize;
+        this.y = y * tileSize;
         this.tileSize = tileSize;
         this.tileColor = tileColor;
     }

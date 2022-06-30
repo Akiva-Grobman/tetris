@@ -19,7 +19,7 @@ public class TetrisGraphicsContainer implements GameLoopDrawable {
                 tileRowCount,
                 getBoardColors
         );
-        window.add(tetrisGraphicsBoard);
+        window.addComponent(tetrisGraphicsBoard);
     }
 
     @Override
