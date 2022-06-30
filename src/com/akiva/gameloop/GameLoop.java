@@ -35,7 +35,7 @@ public class GameLoop {
                 timeFromLastRender--;
             }
             if (renderCount >= FPS) {
-                this.updatable.update();
+                this.updatable.updateEachSecond();
                 renderCount = 0;
             }
         }

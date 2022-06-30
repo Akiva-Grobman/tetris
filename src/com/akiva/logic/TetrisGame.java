@@ -28,7 +28,7 @@ public class TetrisGame implements GameLoopUpdatable, Subscribable {
     }
 
     @Override
-    public void update() {
+    public void updateEachSecond() {
         try {
             movedTetrominoDown();
         } catch (ReachedBottomException e) {
