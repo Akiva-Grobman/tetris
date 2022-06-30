@@ -18,6 +18,7 @@ public class Colors {
             add(getDefaultBackgroundColor());
         }
     };
+    public static final int DEFAULT_BACKGROUND_ID = tileColors.size() - 1;
 
     static Color getDefaultBackgroundColor() {
         return Color.black;
