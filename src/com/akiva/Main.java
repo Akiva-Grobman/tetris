@@ -14,7 +14,8 @@ public class Main {
         TetrisGraphicsContainer drawable = new TetrisGraphicsContainer(
                 boardWidth,
                 boardHeight,
-                updatable::getColorIdBoard
+                updatable::getColorIdBoard,
+                updatable::getLineExplodedCount
         );
         GameLoop gameLoop = new GameLoop(drawable, updatable);
         KeyboardInputSubscriber keyboardInputSubscriber = new KeyboardInputSubscriber(updatable);
