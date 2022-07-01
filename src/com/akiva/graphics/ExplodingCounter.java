@@ -21,9 +21,21 @@ public class ExplodingCounter extends JPanel {
     @Override
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
+        String explodingMessage = "Explosion Count: ";
+        String explodingValue = String.valueOf(getExplodingCount.get());
+        int textYAxisPosition = getHeight() / 10;
         graphics.setColor(Colors.getTextColor());
-        graphics.drawString("Explosion Count: ", getWidth() / 2 - graphics.getFontMetrics().stringWidth("Explosion Count: ") / 2, getHeight() / 10);
+        graphics.drawString(explodingMessage,
+                getCenteredXPositionForString(explodingMessage, graphics),
+                textYAxisPosition);
         graphics.setFont(new Font(graphics.getFont().getFontName(), graphics.getFont().getStyle(), 40));
-        graphics.drawString(String.valueOf(getExplodingCount.get()), getWidth() / 2 - graphics.getFontMetrics().stringWidth(String.valueOf(getExplodingCount.get())) / 2, getHeight() / 10 + 50);
+        graphics.drawString(explodingValue,
+                getCenteredXPositionForString(explodingValue, graphics),
+                textYAxisPosition + 50);
     }
+
+    private int getCenteredXPositionForString(String str, Graphics graphics) {
+        return getWidth() / 2 - graphics.getFontMetrics().stringWidth(str) / 2;
+    }
+
 }

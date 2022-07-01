@@ -22,10 +22,10 @@ public class Tile {
 
     void draw(Graphics graphics) {
         graphics.setColor(Colors.getBoardBoarderColor());
-        graphics.drawLine(this.xOffset + this.x, this.yOffset + this.y, this.xOffset + this.x + this.tileSize, this.yOffset + this.y);
-        graphics.drawLine(this.xOffset + this.x, this.yOffset + this.y + this.tileSize, this.xOffset + this.x + this.tileSize, this.yOffset + this.y + this.tileSize);
-        graphics.drawLine(this.xOffset + this.x, this.yOffset + this.y, this.xOffset + this.x, this.yOffset + this.y + this.tileSize);
-        graphics.drawLine(this.xOffset + this.x + this.tileSize, this.yOffset + this.y, this.xOffset + this.x + this.tileSize, this.yOffset + this.y + this.tileSize);
+        drawVerticalLine(0, graphics);
+        drawVerticalLine(tileSize, graphics);
+        drawPerpendicularLine(0, graphics);
+        drawPerpendicularLine(tileSize, graphics);
         graphics.setColor(this.tileColor);
         graphics.fillRect(this.xOffset + x + 4, this.yOffset + y + 4, tileSize - 8, tileSize - 8);
     }
@@ -33,4 +33,19 @@ public class Tile {
     public void setTileColor(Color tileColor) {
         this.tileColor = tileColor;
     }
+
+    private void drawVerticalLine(int yAxisDistanceFromOrigin, Graphics graphics) {
+        graphics.drawLine(xOffset + x,
+                yOffset + y + yAxisDistanceFromOrigin,
+                xOffset + x + tileSize,
+                yOffset + y + yAxisDistanceFromOrigin);
+    }
+
+    private void drawPerpendicularLine(int xAxisDistanceFromOrigin, Graphics graphics) {
+        graphics.drawLine(xOffset + x + xAxisDistanceFromOrigin,
+                yOffset + y,
+                xOffset + x + xAxisDistanceFromOrigin,
+                yOffset + y + tileSize);
+    }
+
 }
