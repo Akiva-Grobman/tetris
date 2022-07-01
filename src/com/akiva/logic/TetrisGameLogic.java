@@ -62,7 +62,7 @@ public class TetrisGameLogic implements GameLoopUpdatable, Subscribable {
     private int[][] getTetrisBoardWithCurrentTetromino() {
         int[][] currentGameState = new int[tetrisBoard.length][];
         for (int i = 0; i < currentGameState.length; i++) {
-            currentGameState[i] = Arrays.copyOf(tetrisBoard[i], tetrisBoard.length);
+            currentGameState[i] = Arrays.copyOf(tetrisBoard[i], tetrisBoard[i].length);
         }
         for (int x = 0; x < currentTetromino.getPositionMatrix().length; x++) {
             for (int y = 0; y < currentTetromino.getPositionMatrix()[x].length; y++) {
