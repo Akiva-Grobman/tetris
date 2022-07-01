@@ -59,8 +59,16 @@ public class TetrominoFactory {
         }
     };
 
-    public static Tetromino getTetromino(TetrominoType tetrominoType, int centerX) {
-        return new Tetromino(tetrominoShapeMapping.get(tetrominoType), tetrominoType.getColorId(), new Point(centerX - 2, 0));
+    public static Tetromino getTetromino(TetrominoType tetrominoType, int boardWidth) {
+        return new Tetromino(
+                tetrominoShapeMapping.get(tetrominoType),
+                tetrominoType.getColorId(),
+                getBoardTopCenterPosition(boardWidth));
+    }
+
+    private static Point getBoardTopCenterPosition(int boardWidth) {
+        int tetrominoWidth = tetrominoShapeMapping.get(TetrominoType.I).length;
+        return new Point(boardWidth / 2 - tetrominoWidth / 2, 0);
     }
 
 }
