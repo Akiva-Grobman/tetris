@@ -10,16 +10,16 @@ import java.util.Arrays;
 public class TetrisGame implements GameLoopUpdatable, Subscribable {
 
     private static final int EMPTY_SQUARE_COLOR_ID = Colors.DEFAULT_BACKGROUND_ID;
-    private final int[][] colorIdBoard;
+    private final int[][] tetrisBoard;
     private int lineExplodedCount = 0;
     private Tetromino currentTetromino;
     private Tetromino nextTetromino;
 
     public TetrisGame(int columnTileCount, int rowTileCount) {
-        colorIdBoard = new int[columnTileCount][];
+        tetrisBoard = new int[columnTileCount][];
         for (int x = 0; x < columnTileCount; x++) {
-            colorIdBoard[x] = new int[rowTileCount];
-            Arrays.fill(colorIdBoard[x], 7);
+            tetrisBoard[x] = new int[rowTileCount];
+            Arrays.fill(tetrisBoard[x], 7);
         }
         currentTetromino = getRandomTetromino();
         nextTetromino = getRandomTetromino();
@@ -55,10 +55,10 @@ public class TetrisGame implements GameLoopUpdatable, Subscribable {
         return this::onUpClick;
     }
 
-    public int[][] getColorIdBoard() {
-        int[][] coloredBoard = new int[colorIdBoard.length][colorIdBoard[0].length];
+    public int[][] getTetrisBoard() {
+        int[][] coloredBoard = new int[tetrisBoard.length][tetrisBoard[0].length];
         for (int i = 0; i < coloredBoard.length; i++) {
-            coloredBoard[i] = Arrays.copyOf(colorIdBoard[i], colorIdBoard[i].length);
+            coloredBoard[i] = Arrays.copyOf(tetrisBoard[i], tetrisBoard[i].length);
         }
         for (int x = 0; x < currentTetromino.getPositionMatrix().length; x++) {
             for (int y = 0; y < currentTetromino.getPositionMatrix()[x].length; y++) {
@@ -102,15 +102,15 @@ public class TetrisGame implements GameLoopUpdatable, Subscribable {
     }
 
     private void removeBottomLineIfFull() {
-        for (int[] column : colorIdBoard) {
+        for (int[] column : tetrisBoard) {
             if (column[column.length - 1] == EMPTY_SQUARE_COLOR_ID) {
                 return;
             }
         }
         lineExplodedCount++;
-        for (int x = 0; x < colorIdBoard.length; x++) {
-            System.arraycopy(colorIdBoard[x], 0, colorIdBoard[x], 1, colorIdBoard[x].length - 1);
-            colorIdBoard[x][0] = 7;
+        for (int x = 0; x < tetrisBoard.length; x++) {
+            System.arraycopy(tetrisBoard[x], 0, tetrisBoard[x], 1, tetrisBoard[x].length - 1);
+            tetrisBoard[x][0] = 7;
         }
         removeBottomLineIfFull();
     }
@@ -122,7 +122,7 @@ public class TetrisGame implements GameLoopUpdatable, Subscribable {
                     continue;
                 }
                 int newYPosition = y + currentTetromino.getPosition().y + 1;
-                if (!(newYPosition < colorIdBoard[0].length) || colorIdBoard[x + currentTetromino.getPosition().x][newYPosition] != EMPTY_SQUARE_COLOR_ID) {
+                if (!(newYPosition < tetrisBoard[0].length) || tetrisBoard[x + currentTetromino.getPosition().x][newYPosition] != EMPTY_SQUARE_COLOR_ID) {
                     throw new ReachedBottomException();
                 }
             }
@@ -149,7 +149,7 @@ public class TetrisGame implements GameLoopUpdatable, Subscribable {
                     continue;
                 }
                 int newXPosition = x + currentTetromino.getPosition().x + direction;
-                if (!(newXPosition < colorIdBoard.length) || !(newXPosition >= 0)  || colorIdBoard[newXPosition][y + currentTetromino.getPosition().y] != EMPTY_SQUARE_COLOR_ID) {
+                if (!(newXPosition < tetrisBoard.length) || !(newXPosition >= 0)  || tetrisBoard[newXPosition][y + currentTetromino.getPosition().y] != EMPTY_SQUARE_COLOR_ID) {
                     return currentTetromino.getPosition().x;
                 }
             }
@@ -161,7 +161,7 @@ public class TetrisGame implements GameLoopUpdatable, Subscribable {
         for (int x = 0; x < currentTetromino.getPositionMatrix().length; x++) {
             for (int y = 0; y < currentTetromino.getPositionMatrix()[x].length; y++) {
                 if (currentTetromino.getPositionMatrix()[x][y]) {
-                    colorIdBoard[x + currentTetromino.getPosition().x][y + currentTetromino.getPosition().y] = currentTetromino.getColorId();
+                    tetrisBoard[x + currentTetromino.getPosition().x][y + currentTetromino.getPosition().y] = currentTetromino.getColorId();
                 }
             }
         }
@@ -171,9 +171,8 @@ public class TetrisGame implements GameLoopUpdatable, Subscribable {
 
     private Tetromino getRandomTetromino() {
         return TetrominoFactory.getTetromino(
-                TetrominoType.values()[(int)(Math.random() * TetrominoType.values().length)],
-                colorIdBoard.length / 2
-            );
+                TetrominoType.getRandomTetrominoType(),
+                tetrisBoard.length);
     }
 
 }

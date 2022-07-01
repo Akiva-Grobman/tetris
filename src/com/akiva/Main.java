@@ -14,7 +14,7 @@ public class Main {
         TetrisGraphicsContainer drawable = new TetrisGraphicsContainer(
                 boardWidth,
                 boardHeight,
-                updatable::getColorIdBoard,
+                updatable::getTetrisBoard,
                 updatable::getNextTetrominoColorIdBoard,
                 updatable::getLineExplodedCount
         );
