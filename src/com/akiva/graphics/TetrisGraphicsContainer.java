@@ -17,19 +17,28 @@ public class TetrisGraphicsContainer implements GameLoopDrawable {
         int height = Toolkit.getDefaultToolkit().getScreenSize().height;
         height = height - (height / 10);
         window = new Window(width, height);
+        Dimension tetrisBoardDimensions = getBoardDimensions(width, height);
         TetrisGraphicsBoard tetrisGraphicsBoard = new TetrisGraphicsBoard(
-                new Dimension(width / 3, height - (height / 10)),
+                new Dimension(tetrisBoardDimensions.width, tetrisBoardDimensions.height),
                 tileColumnCount,
                 tileRowCount,
                 getBoardColors
         );
         window.addComponent(tetrisGraphicsBoard, BorderLayout.CENTER);
+        Dimension explodingCounterDimensions = getExplodingCounterDimensions(width, height);
         window.addComponent(
-                new ExplodingCounter(width / 3, height / 10, getExplodedCount),
+                new ExplodingCounter(
+                        explodingCounterDimensions.width,
+                        explodingCounterDimensions.height,
+                        getExplodedCount),
                 BorderLayout.WEST
             );
+        Dimension nextTetrominoDimensions = getNextTetrominoDisplayDimensions(width, height);
         window.addComponent(
-                new NextTetrominoDisplay(width / 3, height / 10, getNextTetromino),
+                new NextTetrominoDisplay(
+                        nextTetrominoDimensions.width,
+                        nextTetrominoDimensions.height,
+                        getNextTetromino),
                 BorderLayout.EAST
         );
     }
@@ -41,6 +50,18 @@ public class TetrisGraphicsContainer implements GameLoopDrawable {
 
     public void addKeyboardListener(KeyListener keyListener) {
         this.window.addKeyListener(keyListener);
+    }
+
+    private Dimension getBoardDimensions(int displayWidth, int displayHeight) {
+        return new Dimension(displayWidth / 3, displayHeight - (displayHeight / 10));
+    }
+
+    private Dimension getExplodingCounterDimensions(int displayWidth, int displayHeight) {
+        return new Dimension(displayWidth / 3, displayHeight / 10);
+    }
+
+    private Dimension getNextTetrominoDisplayDimensions(int displayWidth, int displayHeight) {
+        return new Dimension(displayWidth / 3, displayHeight / 10);
     }
 
 }
