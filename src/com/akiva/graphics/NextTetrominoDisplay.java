@@ -12,8 +12,8 @@ public class NextTetrominoDisplay extends JPanel {
     private final Supplier<int[][]> getNextTetromino;
 
     public NextTetrominoDisplay(int width, int height, Supplier<int[][]> getNextTetromino) {
-        this.tiles = getStartingTiles(width);
         this.getNextTetromino = getNextTetromino;
+        tiles = getStartingTiles(width);
         Dimension dimension = new Dimension(width, height);
         setPreferredSize(dimension);
         setMaximumSize(dimension);
@@ -21,7 +21,7 @@ public class NextTetrominoDisplay extends JPanel {
         setBackground(Colors.getDefaultBackgroundColor());
     }
 
-    private Tile[][] getStartingTiles(int width) {
+    private Tile[][] getStartingTiles(int displayWidth) {
         int tileColumnCount = 4;
         int tileRowCount = 4;
         Tile[][] tiles = new Tile[tileColumnCount][];
@@ -29,7 +29,7 @@ public class NextTetrominoDisplay extends JPanel {
         for (int x = 0; x < tileColumnCount; x++) {
             tiles[x] = new Tile[tileRowCount];
             for (int y = 0; y < tileRowCount; y++) {
-                tiles[x][y] = new Tile(x, y, color, TILE_SIZE, width / 2 - TILE_SIZE * 2, TILE_SIZE);
+                tiles[x][y] = new Tile(x, y, color, TILE_SIZE, displayWidth / 2 - TILE_SIZE * 2, TILE_SIZE);
             }
         }
         return tiles;
