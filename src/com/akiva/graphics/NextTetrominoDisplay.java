@@ -25,7 +25,7 @@ public class NextTetrominoDisplay extends JPanel {
         int tileColumnCount = 4;
         int tileRowCount = 4;
         Tile[][] tiles = new Tile[tileColumnCount][];
-        Color color = Colors.getRandomColor();
+        Color color = Colors.getDefaultBackgroundColor();
         for (int x = 0; x < tileColumnCount; x++) {
             tiles[x] = new Tile[tileRowCount];
             for (int y = 0; y < tileRowCount; y++) {
