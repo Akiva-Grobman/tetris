@@ -21,7 +21,7 @@ public class KeyboardInputSubscriber implements KeyListener {
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
+    public void keyTyped(KeyEvent ignored) {
         // ignored
     }
 
@@ -34,7 +34,7 @@ public class KeyboardInputSubscriber implements KeyListener {
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyReleased(KeyEvent ignored) {
         // ignored
     }
 
