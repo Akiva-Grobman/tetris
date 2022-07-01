@@ -26,7 +26,7 @@ public class TetrisGame implements GameLoopUpdatable, Subscribable {
     }
 
     @Override
-    public void updateEachSecond() {
+    public void update() {
         onDownClick();
     }
 
