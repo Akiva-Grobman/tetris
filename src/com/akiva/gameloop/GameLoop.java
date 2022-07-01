@@ -6,8 +6,8 @@ import com.akiva.logic.GameLoopUpdatable;
 public class GameLoop {
 
     private static final double FPS = 60;
-    private static final int NANO_SECONDS_IN_SECOND = 1000000000;
-    private static final double TIME_PER_UPDATE = NANO_SECONDS_IN_SECOND / FPS;
+    private static final int SECOND_IN_NANO_SECONDS = 1000000000;
+    private static final double TIME_PER_UPDATE = SECOND_IN_NANO_SECONDS / FPS;
 
     private final GameLoopDrawable drawable;
     private final GameLoopUpdatable updatable;
